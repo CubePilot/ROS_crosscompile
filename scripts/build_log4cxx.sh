@@ -1,11 +1,11 @@
 #! /bin/bash
 
 echo "-------------------------------------------------------------------------"
-echo "Installing log4cxx 0.10.0"
+echo "Installing log4cxx 0.13.0"
 DIR=`pwd`
-PKG_DIR="apache-log4cxx-0.10.0"
-PKG_TAR="apache-log4cxx-0.10.0.zip"
-DOWNLOAD_LINK="https://downloads.apache.org/logging/log4cxx/0.10.0/apache-log4cxx-0.10.0.zip"
+PKG_DIR="apache-log4cxx-0.13.0"
+PKG_TAR="apache-log4cxx-0.13.0.zip"
+DOWNLOAD_LINK="https://downloads.apache.org/logging/log4cxx/0.13.0/apache-log4cxx-0.13.0.zip"
 
 if [ -z  $INSTALL_PREFIX ]; then
   echo "Tell me where to install this. 'export INSTALL_PREFIX=your/path/'"
@@ -14,14 +14,14 @@ fi
 
 # Log 4xx cannot be cross compiled. --host=aarch64-linux-gnu is not understood by configure
 
-# cd build
-# if [ ! -d $PKG_DIR ]; then
-#   if [ ! -f $PKG_TAR ]; then
-#     wget $DOWNLOAD_LINK
-#   fi
-#   unzip $PKG_TAR
-# fi
-# cd $PKG_DIR
+cd build
+if [ ! -d $PKG_DIR ]; then
+  if [ ! -f $PKG_TAR ]; then
+    wget $DOWNLOAD_LINK
+  fi
+  unzip $PKG_TAR
+fi
+cd $PKG_DIR
 
 # CC=aarch64-linux-gnu-gcc CXX=aarch64-linux-gnu-g++ LINK=aarch64-linux-gnu-ld CFLAGS=-fPIC CXXFLAGS=-fPIC ./configure \
 # --prefix=${INSTALL_PREFIX} #\
@@ -57,4 +57,6 @@ fi
 # cd ${DIR}
 
 # since above does not work, we're copying header files to the install directory
-cp -r misc/log4cxx/ ${INSTALL_PREFIX}/include/
+cp -r src/main/include/log4cxx/ ${INSTALL_PREFIX}/include/
+
+cd ${DIR}
