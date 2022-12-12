@@ -21,6 +21,7 @@ mkdir -p build
 cd build
 cmake -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} -DCMAKE_TOOLCHAIN_FILE=${DIR}/arm-toolchain.cmake -DCMAKE_CXX_FLAGS=-fPIC ..
 make
+make install
 cp libtinyxml2.so* ${INSTALL_PREFIX}/lib/
 cp ../tinyxml2.h ${INSTALL_PREFIX}/include/
 
